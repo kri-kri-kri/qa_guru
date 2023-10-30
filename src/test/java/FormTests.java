@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class FormTests {
     @BeforeEach
@@ -19,6 +18,8 @@ public class FormTests {
     @Test
     void successfulSearchTest() {
         open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         $("#firstName").setValue("Ivan");
         $("#lastName").setValue("Ivanov");
         $("#userEmail").setValue("ivan@mai.ru");
@@ -34,7 +35,7 @@ public class FormTests {
         $("#subjectsInput").setValue("mat").pressEnter();
         $("#hobbies-checkbox-2~label").click();
         $("#hobbies-checkbox-3~label").click();
-        $("#uploadPicture").scrollIntoView(true).uploadFromClasspath("image.jpg");;
+        $("#uploadPicture").uploadFromClasspath("image.jpg");;
         $("#currentAddress").setValue("Beverly Hills, 90210");
         $("#state").click();
         $("#react-select-3-option-0").scrollIntoView(true).click();
