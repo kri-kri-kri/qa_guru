@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationPage {
 
-    private SelenideElement
+    private final SelenideElement
 
             pageTitle = $(".practice-form-wrapper"),
             firstNameInput = $("#firstName"),
@@ -25,7 +25,9 @@ public class RegistrationPage {
             inputState = $("#state"),
             inputCity = $("#city"),
             buttonSubmit = $("#submit"),
-            inputAddress = $("#currentAddress");
+            inputAddress = $("#currentAddress"),
+            uploadPicture = $("#uploadPicture"),
+            cityStatePicker = $("#stateCity-wrapper");
 
     CalendarComponent calendarComponent = new CalendarComponent();
 
@@ -84,19 +86,19 @@ public class RegistrationPage {
     }
 
     public RegistrationPage uploadFile(String picture) {
-        $("#uploadPicture").uploadFromClasspath(picture);
+        uploadPicture.uploadFromClasspath(picture);
         return this;
     }
 
     public RegistrationPage enterState(String value) {
         inputState.click();
-        $("#stateCity-wrapper").$(byText(value)).click();
+        cityStatePicker.$(byText(value)).click();
         return this;
     }
 
     public RegistrationPage enterCity(String value) {
         inputCity.click();
-        $("#stateCity-wrapper").$(byText(value)).click();
+        cityStatePicker.$(byText(value)).click();
         return this;
     }
 
@@ -105,10 +107,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkInvalidEmail() {
+    public void checkInvalidEmail() {
         emailInput.shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
-        return this;
     }
-
 
 }
