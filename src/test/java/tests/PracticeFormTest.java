@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.components.ResultComponent;
 
+import static utils.DataUtils.*;
+
 public class PracticeFormTest extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
@@ -14,12 +16,12 @@ public class PracticeFormTest extends TestBase {
 
         registrationPage
                 .openPage()
-                .setFirstName("Ivan")
-                .setLastName("Ivanov")
-                .setEmailInput("ivan@mai.ru")
+                .setFirstName()
+                .setLastName()
+                .setEmailInput()
                 .setGender("Male")
-                .setUserNumber("7917111111")
-                .setBirthDate("December", "9", "2003")
+                .setUserNumber()
+                .setBirthDate(getMonth(), getDay(), getYear())
                 .setSubject("Chemistry")
                 .setSubject("Maths")
                 .setHobbies("Reading")
@@ -31,10 +33,11 @@ public class PracticeFormTest extends TestBase {
                 .submitForm();
 
         resultComponent
-                .checkResult("Student Name", "Ivan Ivanov")
-                .checkResult("Student Email", "ivan@mai.ru")
+//                .checkResult("Student Name", getFirstName() + ' ' + getLastName())
+                .checkResult("Student Name", String.format("%s %s", getFirstName(), getLastName()))
+                .checkResult("Student Email", getEmail())
                 .checkResult("Gender", "Male")
-                .checkResult("Mobile", "7917111111")
+                .checkResult("Mobile", getUserNumber())
                 .checkResult("Date of Birth", "09 December,2003")
                 .checkResult("Subjects", "Chemistry, Maths")
                 .checkResult("Hobbies", "Reading, Music")
@@ -47,11 +50,11 @@ public class PracticeFormTest extends TestBase {
     void fillFormWithRequiredFieldsTest() {
 
         registrationPage.openPage()
-                .setFirstName("Ivan")
-                .setLastName("Ivanov")
-                .setUserNumber("7917111111")
+                .setFirstName()
+                .setLastName()
+                .setUserNumber()
                 .setGender("Male")
-                .setBirthDate("December","9","2003")
+                .setBirthDate(getMonth(), getDay(), getYear())
                 .submitForm();
 
         resultComponent.checkResult("Student Name", "Ivan Ivanov")
@@ -63,12 +66,12 @@ public class PracticeFormTest extends TestBase {
     @Test
     void invalidEmailTest() {
         registrationPage.openPage()
-                .setFirstName("Ivan")
-                .setLastName("Ivanov")
-                .setEmailInput("abobus")
-                .setUserNumber("79171111111")
+                .setFirstName()
+                .setLastName()
+                .setEmailInput("invalid")
+                .setUserNumber()
                 .setGender("Male")
-                .setBirthDate("December","9","2003")
+                .setBirthDate(getMonth(), getDay(), getYear())
                 .submitForm()
                 .checkInvalidEmail();
     }
