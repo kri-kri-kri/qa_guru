@@ -9,7 +9,6 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static utils.DataUtils.*;
 
 public class RegistrationPage {
 
@@ -40,28 +39,14 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setFirstName() {
-        firstNameInput.setValue(getFirstName());
-        return this;
-    }
-
     public RegistrationPage setFirstName(String value) { // если хотим загнать что-то не из faker
         firstNameInput.setValue(value);
         return this;
     }
 
-    public RegistrationPage setLastName() {
-        lastNameInput.setValue(getLastName());
-        return this;
-    }
 
     public RegistrationPage setLastName(String value) {
         lastNameInput.setValue(value);
-        return this;
-    }
-
-    public RegistrationPage setEmailInput() {
-        emailInput.setValue(getEmail());
         return this;
     }
 
@@ -75,15 +60,11 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setUserNumber() {
-        userNumberInput.setValue(getUserNumber());
-        return this;
-    }
-
     public RegistrationPage setUserNumber(String value) {
         userNumberInput.setValue(value);
         return this;
     }
+
 
     public RegistrationPage setBirthDate(String month, String day, String year) {
         dateOfBirthInput.click();
@@ -106,8 +87,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage uploadFile(String picture) {
-        uploadPicture.uploadFromClasspath(picture);
+    public RegistrationPage uploadFile(String value) {
+        uploadPicture.uploadFromClasspath(value);
         return this;
     }
 
