@@ -2,7 +2,6 @@ package tests.old;
 
 import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
-import tests.TestBase;
 
 public class TestBoxTest extends TestBase {
 
